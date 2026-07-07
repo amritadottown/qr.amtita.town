@@ -1,0 +1,29 @@
+---
+import { findMembers, computeSlugs } from '../lib/members';
+import { generateQR, stripAnsi } from '../lib/qr';
+import { renderHtml } from '../lib/html';
+
+export async function getStaticPaths() {
+  const slugs = computeSlugs();
+  return slugs.map(s => ({ params: { slug: s } }));
+}
+
+const { slug } = Astro.params;
+const raw = (slug as string) || '';
+const members = findMembers(raw);
+
+let html: string;
+
+if (members.length === 0) {
+  html = '<!DOCTYPE html><meta charset="utf-8"><title>Not found</title><pre>Not found</pre>';
+} else {
+  const parts = members.map(m => {
+    const targetUrl = `https://${m.website}/`;
+    const qr = generateQR(targetUrl, 'utf8');
+    return `# ${m.name}\n# ${targetUrl}\n${stripAnsi(qr.data.toString())}`;
+  });
+  html = renderHtml(parts.join('\n\n'), 'qr.nithitsuki.com', '', '');
+}
+---
+
+{html}

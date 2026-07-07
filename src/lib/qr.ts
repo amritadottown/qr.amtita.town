@@ -2,6 +2,10 @@ import { execSync } from 'node:child_process';
 
 export type QRFormat = 'utf8' | 'ascii' | 'png';
 
+export function stripAnsi(s: string): string {
+  return s.replace(/\x1b\[[0-9;]*m/g, '');
+}
+
 const VALID_FORMATS = new Set<string>(['utf8', 'ascii', 'png']);
 
 export function isValidFormat(s: string): s is QRFormat {

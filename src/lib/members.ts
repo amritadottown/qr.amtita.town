@@ -1,9 +1,5 @@
 import { readFileSync } from 'node:fs';
-import { resolve, dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const PROJECT_ROOT = resolve(__dirname, '..', '..');
+import { resolve } from 'node:path';
 
 export interface Member {
   name: string;
@@ -14,7 +10,7 @@ export interface Member {
   feeds?: string[];
 }
 
-const MEMBERS_PATH = resolve(PROJECT_ROOT, 'src', 'members.json');
+const MEMBERS_PATH = resolve(process.cwd(), 'src', 'members.json');
 
 let cachedMembers: Member[] | null = null;
 
@@ -23,6 +19,21 @@ export function loadMembers(): Member[] {
   const raw = readFileSync(MEMBERS_PATH, 'utf-8');
   cachedMembers = JSON.parse(raw) as Member[];
   return cachedMembers;
+}
+
+export function computeSlugs(): string[] {
+  const all = loadMembers();
+  const set = new Set<string>();
+  for (const m of all) {
+    const name = m.name.toLowerCase().trim();
+    set.add(name.replace(/\s+/g, '-'));
+    for (const w of name.split(/\s+/)) {
+      set.add(w);
+    }
+    const domain = m.website.toLowerCase().split('/')[0];
+    set.add(domain.split('.')[0]);
+  }
+  return [...set];
 }
 
 export function findMembers(slug: string): Member[] {

@@ -1,0 +1,17 @@
+---
+import { loadMembers } from '../lib/members';
+import { generateQR, stripAnsi } from '../lib/qr';
+import { renderHtml } from '../lib/html';
+
+export async function getStaticPaths() {
+  return [{ params: {} }];
+}
+
+const member = loadMembers().find(m => m.website === 'amrita.town')!;
+const targetUrl = `https://${member.website}/`;
+const qr = generateQR(targetUrl, 'utf8');
+const body = stripAnsi(qr.data.toString());
+const html = renderHtml(body, 'qr.nithitsuki.com', 'QR code for the amrita.town webring', '/amrita.town.png');
+---
+
+{html}

@@ -7,7 +7,9 @@
   },
   "scripts": {
     "fetch-members": "node scripts/fetch-members.mjs",
+    "generate-formats": "node scripts/generate-formats.mjs",
     "prebuild": "node scripts/fetch-members.mjs",
+    "postbuild": "node scripts/generate-formats.mjs",
     "predev": "node scripts/fetch-members.mjs",
     "dev": "astro dev",
     "build": "astro build",
@@ -15,7 +17,6 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/node": "^11.0.2",
     "astro": "^7.0.6"
   }
 }
