@@ -104,7 +104,7 @@ export const GET: APIRoute = ({ params, request }) => {
       'X-QR-Target': targetUrl,
       'X-QR-Member': m.name,
     }, accept, {
-      title: `qr.amrita.town — ${m.name}`,
+      title: `qr.nithitsuki.com — ${m.name}`,
       desc: `QR code for ${m.name} on the amrita.town webring`,
       img: ogImage,
     });
@@ -119,7 +119,7 @@ export const GET: APIRoute = ({ params, request }) => {
       'X-QR-Member': m.name,
       'X-QR-Multiple-Matches': members.map(x => x.name).join(', '),
     }, accept, {
-      title: `qr.amrita.town — ${members.length} matches`,
+      title: `qr.nithitsuki.com — ${members.length} matches`,
       desc: `QR codes for ${members.map(x => x.name).join(', ')}`,
       img: ogImage,
     });
@@ -133,7 +133,7 @@ export const GET: APIRoute = ({ params, request }) => {
 
   const body = Buffer.from(parts.join('\n\n'));
   return render(body, 'text/plain; charset=utf-8', {}, accept, {
-    title: `qr.amrita.town — ${members.length} matches`,
+    title: `qr.nithitsuki.com — ${members.length} matches`,
     desc: `QR codes for ${members.map(x => x.name).join(', ')}`,
     img: ogImage,
   });

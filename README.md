@@ -1,43 +1,35 @@
-# Astro Starter Kit: Minimal
+# qr.nithitsuki.com
 
-```sh
-bun create astro@latest -- --template minimal
-```
+Generate QR codes for amrita.town members.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Usage
 
-## 🚀 Project Structure
+    curl qr.nithitsuki.com/<name>[.<format>]
+    curl "qr.nithitsuki.com/<name>?f=<format>"
 
-Inside of your Astro project, you'll see the following folders and files:
+## Formats
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+| Extension   | Description              |
+|-------------|--------------------------|
+| `.utf8`     | terminal ANSI art (default) |
+| `.ascii`    | plain block characters   |
+| `.png`      | image                    |
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Name matching
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+- `adithya-nair` — exact full name (hyphenated)
+- `nair` — matches any member with "nair" in name
+- `heftymouse` — website shortcode (first part of domain)
 
-Any static assets, like images, can be placed in the `public/` directory.
+Multiple matches return all QR codes separated by headers.
+For PNG, only the first match is returned.
 
-## 🧞 Commands
+## Examples
 
-All commands are run from the root of the project, from a terminal:
+    curl qr.nithitsuki.com/adithya-nair.utf8
+    curl qr.nithitsuki.com/nair.ascii
+    curl qr.nithitsuki.com/heftymouse.png
+    curl qr.nithitsuki.com/adithya?f=ascii
+    curl qr.nithitsuki.com/                      # amrita.town itself
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `bun install`             | Installs dependencies                            |
-| `bun dev`             | Starts local dev server at `localhost:4321`      |
-| `bun build`           | Build your production site to `./dist/`          |
-| `bun preview`         | Preview your build locally, before deploying     |
-| `bun astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `bun astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Part of the [amrita.town](https://amrita.town) webring.

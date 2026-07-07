@@ -4,14 +4,14 @@ export const prerender = false;
 
 export const GET: APIRoute = () => {
   const body = `\
-qr.amrita.town
-━━━━━━━━━━━━━━
+qr.nithitsuki.com
+━━━━━━━━━━━━━━━
 
 Generate QR codes for amrita.town members.
 
 Usage
-    curl qr.amrita.town/<name>[.<format>]
-    curl "qr.amrita.town/<name>?f=<format>"
+    curl qr.nithitsuki.com/<name>[.<format>]
+    curl "qr.nithitsuki.com/<name>?f=<format>"
 
 Formats
     .utf8      terminal ANSI art (default)
@@ -27,11 +27,11 @@ Multiple matches return all QR codes separated by headers.
 For PNG, only the first match is returned.
 
 Examples
-    curl qr.amrita.town/adithya-nair.utf8
-    curl qr.amrita.town/nair.ascii
-    curl qr.amrita.town/heftymouse.png
-    curl qr.amrita.town/adithya?f=ascii
-    curl qr.amrita.town/                      # amrita.town itself
+    curl qr.nithitsuki.com/adithya-nair.utf8
+    curl qr.nithitsuki.com/nair.ascii
+    curl qr.nithitsuki.com/heftymouse.png
+    curl qr.nithitsuki.com/adithya?f=ascii
+    curl qr.nithitsuki.com/                      # amrita.town itself
 
 Part of the amrita.town webring — https://amrita.town
 `;
