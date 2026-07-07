@@ -14,4 +14,4 @@ const body = stripAnsi(qr.data.toString());
 const html = renderHtml(body, 'qr.nithitsuki.com', 'QR code for the amrita.town webring', '/amrita.town.png');
 ---
 
-{html}
+<Fragment set:html={html} />
